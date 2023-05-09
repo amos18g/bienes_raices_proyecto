@@ -1,0 +1,62 @@
+
+
+USE realstate;
+
+
+CREATE TABLE tipo(
+	codigoTipo int NOT NULL AUTO_INCREMENT,
+    descripcion ENUM('venta', 'alquiler') NOT NULL,
+    PRIMARY KEY(codigoTipo)
+);
+
+
+CREATE TABLE clave_catastral(
+	codigoClave int NOT NULL AUTO_INCREMENT,
+    claveCatastral int NOT NULL unique,
+    fechaDescripcion DATE,
+    departamento VARCHAR(25),
+    PRIMARY KEY(codigoClave)
+);
+
+CREATE TABLE inmueble(
+	codigoInmueble int NOT NULL AUTO_INCREMENT,
+    color VARCHAR(25),
+    Area DOUBLE  NOT NULL,
+    piso INT NOT NULL,
+    precioPorMetro DOUBLE,
+    codigoTipo INT NOT NULL,
+    codigoClave INT NOT NULL UNIQUE,
+    precioAlquiler double,
+    FOREIGN KEY (codigoTipo) REFERENCES Tipo(codigoTipo),
+    FOREIGN KEY (codigoClave) REFERENCES clave_catastral(codigoClave),
+    PRIMARY KEY(codigoInmueble)
+);
+
+CREATE TABLE duenio (
+	codigoDuenio INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(25) NOT NULL,
+    apellido VARCHAR(25) NOT NULL,
+    telefono VARCHAR(25) NOT NULL,
+    correo VARCHAR(50) NOT NULL,
+    PRIMARY KEY(codigoDuenio)
+);
+
+
+CREATE TABLE duenio_inmueble(
+	codigoDuenio INT NOT NULL,
+    codigoInmueble INT NOT NULL,
+    PRIMARY KEY(codigoDuenio, codigoInmueble),
+    FOREIGN KEY (codigoDuenio) REFERENCES duenio(codigoDuenio),
+    FOREIGN KEY (codigoInmueble) REFERENCES inmueble(codigoInmueble)
+);
+
+CREATE TABLE cuota(
+	codigoCuota INT NOT NULL,
+    codigoInmueble INT NOT NULL,
+    fechaVencimiento date,
+    descripcion ENUM('A', 'P') NOT NULL,
+    monto DOUBLE,
+    PRIMARY KEY(codigoCuota),
+    FOREIGN KEY (codigoInmueble) REFERENCES inmueble(codigoInmueble) 
+
+);
