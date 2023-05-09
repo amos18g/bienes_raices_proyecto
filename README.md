@@ -1,4 +1,4 @@
-# Proyecto Inmobiliaria Spring Boot + Java 11 + mySQL
+# Proyecto Inmobiliaria Spring Boot 2.7 + Java 11 + mySQL
 
 La empresa inmobiliaria ABDC está implementando un sistema que le permita administrar sus propiedades, esta empresa ofrece servicios de venta y de alquiler de inmobiliaria residencial. Para lo cual se planten las siguientes condiciones.
 
